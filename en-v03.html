@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="es" class="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -289,17 +289,23 @@ padding: 20px;
 </head>
 
 <body class="font-inter bg-slate-100 dark:bg-slate-850 text-gray-800 dark:text-slate-200">
-    <noscript>You need to enable JavaScript to use this application.</noscript>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
     
-    <div class="custom-image-widget" style="position: relative; display: inline-block;">
-        <a href="https://bebell-digital-solutions.github.io/magic-toolbox-database/en-v03">
-            <img class="custom-image" 
-                 src="https://bucket.mlcdn.com/a/3336/3336910/images/2891bb0a192c808fe1bb53e3905fc787957c2085.png" 
-                 alt="English Translation"
-                 style="display: block;">
-        </a>
-    </div>
-  
+    
+         <div class="custom-image-widget" style="position: relative; display: inline-block;"> <!-- ADD THESE STYLES -->
+    <a href="https://bebell-digital-solutions.github.io/magic-toolbox-database/es-v03">
+        <img class="custom-image" 
+             src="https://bucket.mlcdn.com/a/3336/3336910/images/138f14304ea21715dfae64ae5fe1d71b08c2d451.png" 
+             alt="English Translation"
+             style="display: block;"> <!-- Ensure image is block-level -->
+    </a>
+
+</div>
+
+    
+    
+    
+
     <div id="loadingOverlay" class="loading-overlay">
         <div class="text-center">
             <svg class="mx-auto h-12 w-12 text-magic-purple dark:text-magic-teal animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -392,21 +398,19 @@ padding: 20px;
                         <a href="#" class="hover:text-magic-purple dark:hover:text-magic-teal">Privacy Policy</a>
                         <a href="#" class="hover:text-magic-purple dark:hover:text-magic-teal">Terms of Service</a>
                     </div>
-
-                    
  
                     
                             <div class="social-links">
-            <a href="https://bebell-digital-solutions.github.io/checklist-creator" class="social-link" rel="noopener">
+            <a href="https://bebell-digital-solutions.github.io/checklist-creator/espanol" class="social-link" rel="noopener">
                 <span>☑️</span> Checklist Creator
             </a>
-            <a href="https://bebell-digital-solutions.github.io/tasks-manager/en-v03" class="social-link" rel="noopener">
+            <a href="https://bebell-digital-solutions.github.io/tasks-manager/espanol" class="social-link" rel="noopener">
                 <span>🎯</span> Tasks Manager
             </a>
-            <a href="https://bebell-digital-solutions.github.io/links-manager/en-v03" class="social-link" rel="noopener">
+            <a href="https://bebell-digital-solutions.github.io/bookmark-page/es-v03" class="social-link" rel="noopener">
                 <span>🔗</span> Links Manager
             </a>
-            <a href="https://bebell-digital-solutions.github.io/magic-toolbox-database/en-v03" class="social-link" rel="noopener">
+            <a href="https://bebell-digital-solutions.github.io/magic-toolbox-aplicacion" class="social-link" rel="noopener">
                 <span>🧰</span> Magic Toolbox
             </a>
             <a href="mailto:soporte@bebelldigitalsolutions.com" class="social-link"  rel="noopener">
@@ -432,7 +436,6 @@ padding: 20px;
 
 
 
-            
 
             <div id="toolDetailModal" class="fixed inset-0 bg-black bg-opacity-60 dark:bg-opacity-75 flex items-center justify-center p-3 sm:p-4 z-50" style="display: none;" aria-modal="true" role="dialog" aria-labelledby="modalTitle">
                 <div id="toolDetailModalContentWrapper" class="bg-white dark:bg-slate-800 rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-4 sm:p-6 md:p-8 modal-content-anim custom-scrollbar">
@@ -442,9 +445,11 @@ padding: 20px;
         </div>
     </div>
     
-    <script>
+    
+    
+<script>
         // --- CONSTANTS ---
-        const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTK1bfBJxE--7K92JORcpaU6rSvC8ze8Fg7nWJ7oVCT2HYsCcsqMTiA_N2oP-T0M8245r17RilBnX6t/pub?output=csv';
+        const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTK1bfBJxE--7K92JORcpaU6rSvC8ze8Fg7nWJ7oVCT2HYsCcsqMTiA_N2oP-T0M8245r17RilBnX6t/pub?gid=923608754&single=true&output=csv'; // PASTE YOUR URL
         const ALL_TOOLS_CATEGORY_ID = 'all';
         const ALL_TOOLS_CATEGORY_NAME = 'All Tools';
         const ALL_TOOLS_CATEGORY_DESCRIPTION = 'Explore all available tools from each category.';
@@ -454,8 +459,7 @@ padding: 20px;
         const MAX_VISIBLE_SUBCATEGORIES_SM = 4;
         const ICONS_LIST = ['aperture', 'axe', 'atom', 'award', 'anchor', 'airplay', 'activity', 'accessibility', 'album', 'archive', 'blender', 'bold', 'bug', 'cake', 'calculator', 'calendar', 'camera', 'clipboard', 'cloud', 'cog', 'compass', 'cpu', 'crop', 'database', 'disc', 'droplet', 'edit', 'feather', 'figma', 'film', 'filter', 'flag', 'folder', 'gift', 'globe', 'grid', 'hash', 'headphones', 'heart', 'home', 'image', 'inbox', 'key', 'layers', 'layout', 'link', 'loader', 'lock', 'map', 'maximize', 'mic', 'minimize', 'monitor', 'moon', 'mouse-pointer', 'music', 'navigation', 'package', 'paperclip', 'pause', 'pen-tool', 'percent', 'pie-chart', 'play', 'power', 'printer', 'radio', 'refresh-cw', 'save', 'scissors', 'search', 'send', 'settings', 'shield', 'shopping-cart', 'shuffle', 'sidebar', 'sliders', 'smartphone', 'smile', 'speaker', 'star', 'sun', 'sunrise', 'sunset', 'tag', 'target', 'terminal', 'thermometer', 'thumbs-up', 'toggle-left', 'tool', 'trash', 'trending-up', 'truck', 'tv', 'umbrella', 'unlock', 'upload', 'user', 'video', 'volume-2', 'watch', 'wifi', 'wind', 'zap', 'zoom-in', 'brain', 'code-2', 'layout-dashboard', 'server', 'lightbulb', 'network', 'rocket', 'puzzle', 'library', 'siren', 'command', 'compass', 'cpu', 'credit-card', 'crown', 'download-cloud', 'hard-drive', 'help-circle', 'inspection-panel', 'life-buoy', 'mail-check', 'move-3d', 'receipt', 'scan-face', 'shopping-bag', 'shovel', 'sparkles', 'speech', 'table', 'toy-brick', 'verified', 'wallet', 'wand-2', 'webhook', 'workflow', 'folder-kanban', 'settings-2', 'database-zap', 'list-checks', 'message-circle', 'play-circle', 'edit-3', 'bar-chart-big', 'megaphone', 'contact-2', 'landmark', 'shield-check', 'brain-circuit', 'briefcase', 'calendar-check-2', 'archive-restore', 'book-user', 'candlestick-chart', 'codesandbox', 'coins', 'contact-round', 'construction', 'container', 'dollar-sign', 'dumbbell', 'factory', 'file-sliders', 'flask-conical', 'gallery-thumbnails', 'gantt-chart-square', 'gem', 'graduation-cap', 'group', 'history', 'hotel', 'hourglass', 'keyboard', 'lamp-desk', 'languages', 'laptop-2', 'layout-template', 'line-chart', 'list-ordered', 'locate-fixed', 'map-pinned', 'message-square-plus', 'microscope', 'notepad-text', 'paint-bucket', 'palette', 'panel-left-close', 'pilcrow-square', 'plane-takeoff', 'presentation', 'projector', 'receipt-text', 'recycle', 'replace', 'rss', 'ruler', 'scale', 'scan-barcode', 'school-2', 'scroll-text', 'server-cog', 'shapes', 'sheet', 'ship-wheel', 'signpost-big', 'store', 'syringe', 'test-tube-2', 'ticket-percent', 'toggle-right', 'trees', 'user-cog', 'vault', 'volume-x', 'vote', 'wallet-cards', 'webcam', 'wrench', 'youtube', 'clipboard-edit', 'file-text', 'file-search', 'file-json', 'file-code', 'file-spreadsheet', 'file-archive', 'file-audio', 'file-image', 'file-video', 'file-digit', 'file-input', 'file-output', 'file-plus', 'file-minus', 'file-x', 'folder-open', 'folder-plus', 'folder-minus', 'folder-x', 'folder-git-2', 'folder-search', 'folder-sync', 'file-lock-2'];
         const SAMPLE_TAGS_LIST = [['AI', 'Productivity', 'Free'], ['Creative', 'Design', 'Paid'], ['Development', 'Utility', 'Open Source'], ['Marketing', 'Analytics', 'Freemium'], ['Business', 'Collaboration', 'Subscription'], ['Data', 'Research', 'Beta'], ['Automation', 'Efficiency', 'New'], ['Finance', 'Tracking', 'Pro'], ['Security', 'Privacy', 'Essential'], ['Content', 'Writing', 'Popular'], ['Sales', 'CRM', 'Enterprise'], ['Ecommerce', 'Online Store', 'Payments'], ['Social', 'Engagement', 'Community'], ['Project Management', 'Agile', 'Teamwork'], ['Audio', 'Podcast', 'Music Production'], ['Video Editing', 'Filmmaking', 'Streaming']];
-        const REQUIRED_COLUMNS = ['CategoryID', 'CategoryName', 'SubcategoryID', 'SubcategoryName', 'ToolName', 'ToolExternalURL'];
-        const CACHE_EXPIRY_DAYS = 1;
+
 
         // --- STATE VARIABLES ---
         let toolboxData = [];
@@ -467,7 +471,6 @@ padding: 20px;
         let isSidebarOpen = false;
         let selectedTool = null; 
         let showAllSubcategoriesState = false;
-
 
         // --- DOM ELEMENTS ---
         const loadingOverlayEl = document.getElementById('loadingOverlay');
@@ -498,11 +501,7 @@ padding: 20px;
         const toolDetailModalContentWrapperEl = document.getElementById('toolDetailModalContentWrapper');
         const datetimeEl = document.getElementById('datetime');
         const copyrightYearEl = document.getElementById('copyrightYear');
-        
-        
-        
-        
-        
+
         // --- HELPER FUNCTIONS ---
         function refreshLucideIcons() {
             if (window.lucide && typeof window.lucide.createIcons === 'function') {
@@ -511,19 +510,14 @@ padding: 20px;
         }
 
         function updateDate() {
-            if (datetimeEl) {
-                datetimeEl.textContent = new Date().toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric',
-                    weekday: 'long'
-                });
-            }
+          if (datetimeEl) {
+            datetimeEl.textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+          }
         }
 
         function updateCopyrightYear() {
             if (copyrightYearEl) {
-                copyrightYearEl.textContent = `© ${new Date().getFullYear()} Magic Toolbox. All rights reserved.`;
+                copyrightYearEl.textContent = `© ${new Date().getFullYear()} Magic Toolbox • All rights reserved.`;
             }
         }
         
@@ -538,10 +532,9 @@ padding: 20px;
                 backToTop.style.cursor = "pointer";
                 backToTop.style.zIndex = "9999";
                 backToTop.style.transition = "opacity 0.3s ease-in-out, transform 0.2s ease-in-out";
-                backToTop.style.opacity = "0";
+                backToTop.style.opacity = "0"; // Start hidden
                 backToTop.classList.add("p-0", "bg-transparent", "rounded-full", "hover:scale-110");
                 backToTop.title = "Back to top";
-                backToTop.setAttribute('aria-label', 'Back to top');
                 
                 const backToTopImg = document.createElement("img");
                 backToTopImg.src = "https://bucket.mlcdn.com/a/3336/3336910/images/c47af421de0053354b22823335d5e860b2e55255.png";
@@ -586,7 +579,7 @@ padding: 20px;
             applyDarkMode();
         }
 
-       // --- SIDEBAR ---
+        // --- SIDEBAR ---
         function toggleSidebar(open) {
             isSidebarOpen = typeof open === 'boolean' ? open : !isSidebarOpen;
             if (sidebarEl) {
@@ -609,10 +602,8 @@ padding: 20px;
             }
             refreshLucideIcons();
         }
-
-
         
- function renderSidebar() {
+        function renderSidebar() {
             let html = `
                 <li>
                     <a href="#" data-category-id="${ALL_TOOLS_CATEGORY_ID}" class="sidebar-item flex items-center py-2 px-3 sm:py-2.5 sm:px-4 rounded-lg transition-all duration-200 ease-in-out group ${currentCategoryId === ALL_TOOLS_CATEGORY_ID ? 'active' : 'text-gray-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'}" aria-current="${currentCategoryId === ALL_TOOLS_CATEGORY_ID ? 'page' : 'false'}">
@@ -635,10 +626,7 @@ padding: 20px;
             refreshLucideIcons();
         }
 
-
-
-
-    // --- MODAL ---
+        // --- MODAL ---
         function openModal(toolId) {
             selectedTool = findToolById(toolId);
             if (!selectedTool || !toolDetailModalContentWrapperEl || !toolDetailModalEl) return;
@@ -659,10 +647,10 @@ padding: 20px;
                 </div>
                 <div class="flex flex-wrap gap-2 sm:gap-3">
                     <a href="${selectedTool.externalUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-4 py-2 text-xs sm:text-sm sm:px-5 sm:py-2.5 bg-magic-purple text-white font-medium rounded-lg transition-colors hover:bg-magic-purple-light dark:hover:bg-magic-purple-light">
-                        Visitar Herramienta <i data-lucide="external-link" class="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1.5 sm:ml-2"></i>
+                        Visit Tool <i data-lucide="external-link" class="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1.5 sm:ml-2"></i>
                     </a>
                     <button id="closeModalBtnBottom" class="inline-flex items-center justify-center px-4 py-2 text-xs sm:text-sm sm:px-5 sm:py-2.5 border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 font-medium rounded-lg transition-colors">
-                        Cerrar
+                        Close
                     </button>
                 </div>
             `;
@@ -695,7 +683,7 @@ padding: 20px;
             return null;
         }
 
-         // --- TOOL CARD RENDERING ---
+        // --- TOOL CARD RENDERING ---
         function createToolCardHTML(tool) {
             const tagsHTML = tool.tags.map(tag => `<span class="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full">${tag}</span>`).join('');
 
@@ -715,10 +703,10 @@ padding: 20px;
                     <div class="flex flex-wrap gap-1 mb-4 sm:gap-1.5 sm:mb-5">${tagsHTML}</div>
                     <div class="mt-auto flex gap-2 sm:gap-3">
                         <a href="${tool.externalUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm bg-magic-purple text-white font-medium rounded-lg transition-colors hover:bg-magic-purple-light dark:hover:bg-magic-purple-light">
-                            Visitar <i data-lucide="external-link" class="w-3 h-3 sm:w-3.5 sm:h-3.5 ml-1 sm:ml-1.5"></i>
+                            Visit <i data-lucide="external-link" class="w-3 h-3 sm:w-3.5 sm:h-3.5 ml-1 sm:ml-1.5"></i>
                         </a>
                         <button data-tool-id="${tool.id}" class="open-modal-btn flex-1 inline-flex items-center justify-center px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium rounded-lg transition-colors">
-                            Detalles <i data-lucide="info" class="w-3 h-3 sm:w-3.5 sm:h-3.5 ml-1 sm:ml-1.5"></i>
+                            Details <i data-lucide="info" class="w-3 h-3 sm:w-3.5 sm:h-3.5 ml-1 sm:ml-1.5"></i>
                         </button>
                     </div>
                 </div>`;
@@ -736,25 +724,23 @@ padding: 20px;
                     </div>
                     <div class="tool-actions">
                         <a href="${tool.externalUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 bg-magic-purple text-white font-medium rounded-lg transition-colors whitespace-nowrap hover:bg-magic-purple-light dark:hover:bg-magic-purple-light">
-                            Visitar <i data-lucide="external-link" class="w-2.5 h-2.5 sm:w-3 sm:h-3 ml-1"></i>
+                            Visit <i data-lucide="external-link" class="w-2.5 h-2.5 sm:w-3 sm:h-3 ml-1"></i>
                         </a>
                         <button data-tool-id="${tool.id}" class="open-modal-btn inline-flex items-center justify-center px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium rounded-lg transition-colors whitespace-nowrap">
-                            Detalles <i data-lucide="info" class="w-2.5 h-2.5 sm:w-3 sm:h-3 ml-1"></i>
+                            Details <i data-lucide="info" class="w-2.5 h-2.5 sm:w-3 sm:h-3 ml-1"></i>
                         </button>
                     </div>
                 </div>`;
             }
         }
-
-                function renderErrorMessage(message, isConfigError = false) {
+        
+        function renderErrorMessage(message, isConfigError = false) {
             let detailMessage = '';
             if (isConfigError) {
                  detailMessage = `<p class="text-sm mt-1">Please check the GOOGLE_SHEET_CSV_URL variable in this HTML file's script.</p>`;
             } else {
                  detailMessage = `<p class="text-sm mt-1">Try reloading the page. If the problem persists, contact the administrator.</p>`;
             }
-
-
 
             toolsGridContainerEl.innerHTML = `
                 <div class="flex-grow flex items-center justify-center p-4">
@@ -771,28 +757,26 @@ padding: 20px;
             refreshLucideIcons();
         }
 
+        function renderTools() {
+            if (!toolsGridContainerEl) return;
+            const toolsToDisplay = getFilteredTools();
+            
+            toolsGridContainerEl.innerHTML = ''; // Clear previous content or error messages
 
-function renderTools() {
-    if (!toolsGridContainerEl) return;
-    const toolsToDisplay = getFilteredTools();
-    
-    toolsGridContainerEl.innerHTML = ''; // Clear previous content or error messages
+            if (toolsToDisplay.length > 0) {
+                const toolsHtml = toolsToDisplay.map(tool => createToolCardHTML(tool)).join('');
+                const gridDiv = document.createElement('div');
+                gridDiv.id = 'toolsGridActual'; // Give it a distinct ID if needed
+                gridDiv.className = `flex-grow ${viewMode === 'list' ? 'flex flex-col gap-3 sm:gap-4' : 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6'}`;
+                gridDiv.innerHTML = toolsHtml;
+                toolsGridContainerEl.appendChild(gridDiv);
+            } else {
+                toolsGridContainerEl.innerHTML = `<p class="col-span-full text-center text-gray-500 dark:text-slate-400 py-6 sm:py-8 text-sm sm:text-base">No tools found for this selection.</p>`;
+            }
+            refreshLucideIcons();
+        }
 
-    if (toolsToDisplay.length > 0) {
-        const toolsHtml = toolsToDisplay.map(tool => createToolCardHTML(tool)).join('');
-        const gridDiv = document.createElement('div');
-        gridDiv.id = 'toolsGridActual'; // Give it a distinct ID if needed
-        gridDiv.className = `flex-grow ${viewMode === 'list' ? 'flex flex-col gap-3 sm:gap-4' : 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6'}`;
-        gridDiv.innerHTML = toolsHtml;
-        toolsGridContainerEl.appendChild(gridDiv);
-    } else {
-        toolsGridContainerEl.innerHTML = `<p class="col-span-full text-center text-gray-500 dark:text-slate-400 py-6 sm:py-8 text-sm sm:text-base">No tools found for this selection.</p>`;
-    }
-    refreshLucideIcons();
-}
-
-
-// --- MAIN CONTENT AREA LOGIC ---
+        // --- MAIN CONTENT AREA LOGIC ---
         function getFilteredTools() {
             let tools = [];
             if (currentCategoryId === ALL_TOOLS_CATEGORY_ID) {
@@ -818,9 +802,8 @@ function renderTools() {
             }
             return tools;
         }
-
-
-     function renderSubcategoryFilters() {
+        
+        function renderSubcategoryFilters() {
             if (!subcategoryFiltersContainerEl) return;
             let subcategoriesForFilter = [];
             let uniqueSubMap = new Map();
@@ -843,7 +826,7 @@ function renderTools() {
             
             let html = '';
             if (subcategoriesForFilter.length > 0) {
-                 html += `<button data-subcategory-id="null" class="subcategory-filter-btn px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm rounded-md font-medium transition-colors ${!currentSubcategoryId ? 'bg-magic-purple text-white dark:bg-magic-teal dark:text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'}" aria-pressed="${!currentSubcategoryId}">Todas</button>`;
+                 html += `<button data-subcategory-id="null" class="subcategory-filter-btn px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm rounded-md font-medium transition-colors ${!currentSubcategoryId ? 'bg-magic-purple text-white dark:bg-magic-teal dark:text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'}" aria-pressed="${!currentSubcategoryId}">All</button>`;
             }
 
             const isSmallScreen = window.innerWidth < 640;
@@ -857,14 +840,14 @@ function renderTools() {
 
             if (canShowMore) {
                 html += `<button id="toggleShowAllSubcategoriesBtn" class="px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm rounded-md font-medium transition-colors text-magic-purple dark:text-magic-teal hover:bg-magic-purple/10 dark:hover:bg-magic-teal/10 flex items-center" aria-expanded="${showAllSubcategoriesState}">
-                            ${showAllSubcategoriesState ? 'Ver Menos' : 'Ver Más'}
+                            ${showAllSubcategoriesState ? 'Show Less' : 'Show More'}
                             <i data-lucide="${showAllSubcategoriesState ? 'chevron-up' : 'chevron-down'}" class="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1 sm:ml-1.5"></i>
                          </button>`;
             }
             
             const categoryObj = toolboxData.find(cat => cat.id === currentCategoryId);
             if (subcategoriesForFilter.length === 0 && currentCategoryId !== ALL_TOOLS_CATEGORY_ID && categoryObj && (!categoryObj.subcategories || categoryObj.subcategories.length === 0)) {
-                html = `<p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">No hay subcategorías para esta sección.</p>`;
+                html = `<p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">No subcategories for this section.</p>`;
             }
             
             subcategoryFiltersContainerEl.innerHTML = html;
@@ -910,9 +893,7 @@ function renderTools() {
             refreshLucideIcons();
         }
 
-
-
-         // --- EVENT HANDLERS ---
+        // --- EVENT HANDLERS ---
         function handleCategorySelect(e) {
             if (!categoryListContainerEl) return;
             let target = e.target;
@@ -970,29 +951,24 @@ function renderTools() {
             }
         }
 
-
-
-
-
         // --- GOOGLE SHEET DATA PROCESSING ---
-function generateDefaultToolDetails(toolName, subcategoryName, categoryName) {
-    return `
-        <p>Detailed information about <strong>${toolName}</strong>.</p>
-        <p>This tool is specifically designed to assist with various tasks related to ${subcategoryName.toLowerCase()} in the field of ${categoryName}.</p>
-        <h5>Key Features:</h5>
-        <ul>
-            <li>User-friendly and intuitive interface.</li>
-            <li>Advanced functionalities for ${categoryName.split(" ")[0]}.</li>
-            <li>Support for ${subcategoryName.split(" ")[0].toLowerCase()} and more.</li>
-            <li>Regular updates with new improvements.</li>
-            <li>Comprehensive documentation and community support.</li>
-        </ul>
-        <p>Perfect for both experienced professionals and users new to optimizing their ${subcategoryName.toLowerCase()} processes. Boost your productivity and achieve your goals faster with ${toolName}.</p>
-    `;
-}
+        function generateDefaultToolDetails(toolName, subcategoryName, categoryName) {
+            return `
+                <p>Detailed information about <strong>${toolName}</strong>.</p>
+                <p>This tool is specifically designed to assist with various tasks related to ${subcategoryName.toLowerCase()} in the field of ${categoryName}.</p>
+                <h5>Key Features:</h5>
+                <ul>
+                    <li>User-friendly and intuitive interface</li>
+                    <li>Advanced functionalities for ${categoryName.split(" ")[0]}</li>
+                    <li>Support for ${subcategoryName.split(" ")[0].toLowerCase()} and more</li>
+                    <li>Regular updates with new improvements</li>
+                    <li>Comprehensive documentation and community support</li>
+                </ul>
+                <p>Perfect for both experienced professionals and users new to optimizing their ${subcategoryName.toLowerCase()} processes. Boost your productivity and achieve your goals faster with ${toolName}.</p>
+            `;
+        }
 
-
-         async function fetchAndProcessSheetData() {
+        async function fetchAndProcessSheetData() {
             if (loadingOverlayEl) loadingOverlayEl.style.display = 'flex';
             if (loadingMessageEl) loadingMessageEl.textContent = 'Loading tools from Google Sheets...';
 
@@ -1043,7 +1019,7 @@ function generateDefaultToolDetails(toolName, subcategoryName, categoryName) {
                             id: categoryId,
                             name: rawTool.CategoryName.trim(),
                             icon: rawTool.CategoryIcon?.trim() || ICONS_LIST[categoriesMap.size % ICONS_LIST.length],
-                            description: rawTool.CategoryDescription?.trim() || `Tools & Resources for ${rawTool.CategoryName.trim()}.`,
+                            description: rawTool.CategoryDescription?.trim() || `Tools and resources for ${rawTool.CategoryName.trim()}.`,
                             subcategories: [],
                             tools: []
                         });
@@ -1061,9 +1037,7 @@ function generateDefaultToolDetails(toolName, subcategoryName, categoryName) {
                     }
                     
                     const toolIdSuffix = rawTool.ToolID_Suffix?.trim() || `tool${category.tools.length + 1}`;
-
-
- const tool = {
+                    const tool = {
                         id: `${categoryId}-${subcategoryId}-${toolIdSuffix}`,
                         name: rawTool.ToolName.trim(),
                         description: rawTool.ToolDescription?.trim() || `A useful tool for ${rawTool.SubcategoryName.trim()}.`,
@@ -1106,7 +1080,7 @@ function generateDefaultToolDetails(toolName, subcategoryName, categoryName) {
             }
         }
 
- // --- INITIALIZATION ---
+        // --- INITIALIZATION ---
         async function initializeApp() {
             const storedTheme = localStorage.getItem('magic_toolbox_theme');
             isDarkMode = storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -1129,15 +1103,15 @@ function generateDefaultToolDetails(toolName, subcategoryName, categoryName) {
                 } else {
                     currentCategoryId = ALL_TOOLS_CATEGORY_ID; // Or all tools if no categories loaded but no config error
                     if (!appRootContainerEl.querySelector('#toolsGridContainer .bg-red-100')) { // if no error message shown yet
-                renderErrorMessage("Could not find any tool data in the Google Sheet, or the data format is invalid.", false);                    }
+                         renderErrorMessage("No tool data was found in the Google Sheet or the format is incorrect.", false);
+                    }
                 }
-                 }
                 renderSidebar(); 
                 renderMainContentArea();
-            } // Else, the config message or error is already shown               
+            } // Else, the config message or error is already shown
+            
 
-        
-   // Attach event listeners
+            // Attach event listeners
             if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleDarkMode);
             if (openSidebarBtn) openSidebarBtn.addEventListener('click', () => toggleSidebar(true));
             if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', () => toggleSidebar(false));
