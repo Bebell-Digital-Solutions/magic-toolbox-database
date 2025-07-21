@@ -1009,16 +1009,18 @@ padding: 20px;
                     const categoryId = rawTool.CategoryID.trim();
                     const subcategoryId = rawTool.SubcategoryID.trim();
                     
-                    if (!categoriesMap.has(categoryId)) {
-                        categoriesMap.set(categoryId, {
-                            id: categoryId,
-                            name: rawTool.CategoryName.trim(),
-                            icon: rawTool.CategoryIcon?.trim() || ICONS_LIST[categoriesMap.size % ICONS_LIST.length],
-                            description: rawTool.CategoryDescription?.trim() || `Tools and resources for ${rawTool.CategoryName.trim()}.`,
-                            subcategories: [],
-                            tools: []
-                        });
-                    }
+                    
+            if (!categoriesMap.has(categoryId)) {
+    categoriesMap.set(categoryId, {
+        id: categoryId,
+        name: rawTool.CategoryName.trim(),
+        icon: rawTool.CategoryIcon?.trim() || ICONS_LIST[categoriesMap.size % ICONS_LIST.length],
+        description: rawTool.CategoryDescription?.trim() || rawTool.SubcategoryDescription?.trim() || `Tools and resources for ${rawTool.CategoryName.trim()}.`,
+        subcategories: [],
+        tools: []
+    });
+}
+    
                     const category = categoriesMap.get(categoryId);
 
                     let subcategoryObj = category.subcategories.find(s => s.id === subcategoryId);
