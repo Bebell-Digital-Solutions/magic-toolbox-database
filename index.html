@@ -71,6 +71,42 @@
             },
         }
     </script>
+
+
+
+<!-- APP & FAVICON ICONS -->
+<script> function removeFromLinks(rel) {
+for (link of document.head.getElementsByTagName("link")) {
+if (link.rel == rel) {
+document.head.removeChild(link);
+}
+};
+}
+function createNewFavicon(rel, img) {
+var newFavicon = document.createElement("link");
+newFavicon.type = "image/png";
+newFavicon.rel = rel;
+newFavicon.href = img;
+var firstHeadElement = document.head.firstChild;
+document.head.insertBefore(newFavicon, firstHeadElement);
+}
+removeFromLinks("icon");
+removeFromLinks("shortcut icon");
+removeFromLinks("apple-touch-icon");
+createNewFavicon("icon", "https://bucket.mlcdn.com/a/3336/3336910/images/4750de8f08e2d68764dd9c049b523a66818f0d64.png");
+createNewFavicon("shortcut icon", "https://bucket.mlcdn.com/a/3336/3336910/images/4750de8f08e2d68764dd9c049b523a66818f0d64.png");
+createNewFavicon("apple-touch-icon", "https://bucket.mlcdn.com/a/3336/3336910/images/4750de8f08e2d68764dd9c049b523a66818f0d64.png"); </script>
+<!-- APP & FAVICON ICONS -->
+
+
+
+
+
+
+
+
+
+    
     <style>
 
     :root {
