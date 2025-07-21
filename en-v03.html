@@ -472,6 +472,7 @@ padding: 20px;
         let selectedTool = null; 
         let showAllSubcategoriesState = false;
 
+
         // --- DOM ELEMENTS ---
         const loadingOverlayEl = document.getElementById('loadingOverlay');
         const loadingMessageEl = document.getElementById('loadingMessage');
@@ -501,7 +502,6 @@ padding: 20px;
         const toolDetailModalContentWrapperEl = document.getElementById('toolDetailModalContentWrapper');
         const datetimeEl = document.getElementById('datetime');
         const copyrightYearEl = document.getElementById('copyrightYear');
-
         
         
         
@@ -590,32 +590,33 @@ padding: 20px;
             applyDarkMode();
         }
 
-        // --- SIDEBAR ---
+       // --- SIDEBAR ---
         function toggleSidebar(open) {
             isSidebarOpen = typeof open === 'boolean' ? open : !isSidebarOpen;
             if (sidebarEl) {
                 if (isSidebarOpen) {
                     sidebarEl.classList.remove('-translate-x-full');
                     sidebarEl.classList.add('translate-x-0');
-                    sidebarEl.setAttribute('aria-hidden', 'false');
                 } else {
                     sidebarEl.classList.remove('translate-x-0');
                     sidebarEl.classList.add('-translate-x-full');
-                    sidebarEl.setAttribute('aria-hidden', 'true');
                 }
             }
+             // Adjust main content margin when sidebar is fixed on large screens
             const mainContentWrapper = document.getElementById('main-content-wrapper');
-            if (window.innerWidth >= 1024 && mainContentWrapper) {
-                if (!isSidebarOpen) {
-                    mainContentWrapper.classList.add('lg:ml-72');
-                } else {
-                    mainContentWrapper.classList.remove('lg:ml-72');
+            if (window.innerWidth >= 1024 && mainContentWrapper) { // lg breakpoint
+                if (!isSidebarOpen) { // Sidebar is expected to be open and fixed
+                     mainContentWrapper.classList.add('lg:ml-72');
+                } else { // This case for lg should not happen if sidebar is always open, but for consistency:
+                     mainContentWrapper.classList.remove('lg:ml-72');
                 }
             }
             refreshLucideIcons();
         }
+
+
         
-        function renderSidebar() {
+ function renderSidebar() {
             let html = `
                 <li>
                     <a href="#" data-category-id="${ALL_TOOLS_CATEGORY_ID}" class="sidebar-item flex items-center py-2 px-3 sm:py-2.5 sm:px-4 rounded-lg transition-all duration-200 ease-in-out group ${currentCategoryId === ALL_TOOLS_CATEGORY_ID ? 'active' : 'text-gray-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'}" aria-current="${currentCategoryId === ALL_TOOLS_CATEGORY_ID ? 'page' : 'false'}">
@@ -627,8 +628,7 @@ padding: 20px;
             toolboxData.forEach(category => {
                 html += `
                     <li>
-                       
-                       <a href="#" data-category-id="${category.id}" class="sidebar-item flex items-center py-2 px-3 sm:py-2.5 sm:px-4 rounded-lg transition-all duration-200 ease-in-out group ${currentCategoryId === category.id ? 'active' : 'text-gray-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'}" aria-current="${currentCategoryId === category.id ? 'page' : 'false'}">
+                        <a href="#" data-category-id="${category.id}" class="sidebar-item flex items-center py-2 px-3 sm:py-2.5 sm:px-4 rounded-lg transition-all duration-200 ease-in-out group ${currentCategoryId === category.id ? 'active' : 'text-gray-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'}" aria-current="${currentCategoryId === category.id ? 'page' : 'false'}">
                             <i data-lucide="${category.icon}" class="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 transition-colors duration-200 ${currentCategoryId === category.id ? '' : 'text-magic-purple dark:text-magic-teal group-hover:text-magic-purple-light dark:group-hover:text-magic-teal-light'}"></i>
                             <span class="text-xs sm:text-sm font-medium">${category.name}</span>
                         </a>
@@ -642,15 +642,14 @@ padding: 20px;
 
 
 
-
-        // --- MODAL ---
+    // --- MODAL ---
         function openModal(toolId) {
             selectedTool = findToolById(toolId);
             if (!selectedTool || !toolDetailModalContentWrapperEl || !toolDetailModalEl) return;
 
             toolDetailModalContentWrapperEl.innerHTML = `
                 <div class="flex justify-between items-center mb-3 sm:mb-4">
-                    <h3 id="modalTitle" class="text-lg sm:text-xl md:text-2xl font-poppins font-bold text-gray-800 dark:text-slate-100">${selectedTool.name}</h3>
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-poppins font-bold text-gray-800 dark:text-slate-100">${selectedTool.name}</h3>
                     <button id="closeModalBtn" aria-label="Close modal" class="text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 p-1">
                         <i data-lucide="x" class="w-5 h-5 sm:w-6 sm:h-6"></i>
                     </button>
@@ -664,23 +663,17 @@ padding: 20px;
                 </div>
                 <div class="flex flex-wrap gap-2 sm:gap-3">
                     <a href="${selectedTool.externalUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-4 py-2 text-xs sm:text-sm sm:px-5 sm:py-2.5 bg-magic-purple text-white font-medium rounded-lg transition-colors hover:bg-magic-purple-light dark:hover:bg-magic-purple-light">
-                        Visit Tool <i data-lucide="external-link" class="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1.5 sm:ml-2"></i>
+                        Visitar Herramienta <i data-lucide="external-link" class="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1.5 sm:ml-2"></i>
                     </a>
                     <button id="closeModalBtnBottom" class="inline-flex items-center justify-center px-4 py-2 text-xs sm:text-sm sm:px-5 sm:py-2.5 border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 font-medium rounded-lg transition-colors">
-                        Close
+                        Cerrar
                     </button>
                 </div>
             `;
             toolDetailModalEl.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            toolDetailModalContentWrapperEl.scrollTop = 0;
+            document.body.style.overflow = 'hidden'; // Prevent body scroll when modal is open
+            toolDetailModalContentWrapperEl.scrollTop = 0; // Scroll modal to top
             refreshLucideIcons();
-            
-            // Focus on modal for accessibility
-            setTimeout(() => {
-                const closeBtn = document.getElementById('closeModalBtn');
-                if (closeBtn) closeBtn.focus();
-            }, 100);
             
             document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
             document.getElementById('closeModalBtnBottom')?.addEventListener('click', closeModal);
@@ -688,7 +681,7 @@ padding: 20px;
 
         function closeModal() {
             if (toolDetailModalEl) toolDetailModalEl.style.display = 'none';
-            document.body.style.overflow = '';
+            document.body.style.overflow = ''; // Restore body scroll
             selectedTool = null;
         }
 
@@ -697,18 +690,18 @@ padding: 20px;
                 const tool = category.tools.find(t => t.id === toolId);
                 if (tool) return tool;
             }
+            // If searching "all tools", flatMap all tools
             if (currentCategoryId === ALL_TOOLS_CATEGORY_ID) {
                 const allToolsFlat = toolboxData.flatMap(cat => cat.tools);
-                return allToolsFlat.find(t => t.id === toolId);
+                const tool = allToolsFlat.find(t => t.id === toolId);
+                if (tool) return tool;
             }
             return null;
         }
 
-        // --- TOOL CARD RENDERING ---
+         // --- TOOL CARD RENDERING ---
         function createToolCardHTML(tool) {
-            const tagsHTML = tool.tags.map(tag => 
-                `<span class="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full">${tag}</span>`
-            ).join('');
+            const tagsHTML = tool.tags.map(tag => `<span class="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full">${tag}</span>`).join('');
 
             if (viewMode === 'grid') {
                 return `
@@ -726,14 +719,14 @@ padding: 20px;
                     <div class="flex flex-wrap gap-1 mb-4 sm:gap-1.5 sm:mb-5">${tagsHTML}</div>
                     <div class="mt-auto flex gap-2 sm:gap-3">
                         <a href="${tool.externalUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm bg-magic-purple text-white font-medium rounded-lg transition-colors hover:bg-magic-purple-light dark:hover:bg-magic-purple-light">
-                            Visit <i data-lucide="external-link" class="w-3 h-3 sm:w-3.5 sm:h-3.5 ml-1 sm:ml-1.5"></i>
+                            Visitar <i data-lucide="external-link" class="w-3 h-3 sm:w-3.5 sm:h-3.5 ml-1 sm:ml-1.5"></i>
                         </a>
                         <button data-tool-id="${tool.id}" class="open-modal-btn flex-1 inline-flex items-center justify-center px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium rounded-lg transition-colors">
-                            Details <i data-lucide="info" class="w-3 h-3 sm:w-3.5 sm:h-3.5 ml-1 sm:ml-1.5"></i>
+                            Detalles <i data-lucide="info" class="w-3 h-3 sm:w-3.5 sm:h-3.5 ml-1 sm:ml-1.5"></i>
                         </button>
                     </div>
                 </div>`;
-            } else {
+            } else { // List view
                 return `
                 <div class="tool-card tool-card-list-item bg-white dark:bg-slate-800 p-3 sm:p-4 rounded-xl shadow-card-light dark:shadow-card-dark hover:shadow-card-hover-light dark:hover:shadow-card-hover-dark">
                     <div class="tool-icon-container p-2 sm:p-2.5 bg-gradient-to-br from-magic-purple to-magic-teal rounded-lg">
@@ -747,20 +740,25 @@ padding: 20px;
                     </div>
                     <div class="tool-actions">
                         <a href="${tool.externalUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 bg-magic-purple text-white font-medium rounded-lg transition-colors whitespace-nowrap hover:bg-magic-purple-light dark:hover:bg-magic-purple-light">
-                            Visit <i data-lucide="external-link" class="w-2.5 h-2.5 sm:w-3 sm:h-3 ml-1"></i>
+                            Visitar <i data-lucide="external-link" class="w-2.5 h-2.5 sm:w-3 sm:h-3 ml-1"></i>
                         </a>
                         <button data-tool-id="${tool.id}" class="open-modal-btn inline-flex items-center justify-center px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium rounded-lg transition-colors whitespace-nowrap">
-                            Details <i data-lucide="info" class="w-2.5 h-2.5 sm:w-3 sm:h-3 ml-1"></i>
+                            Detalles <i data-lucide="info" class="w-2.5 h-2.5 sm:w-3 sm:h-3 ml-1"></i>
                         </button>
                     </div>
                 </div>`;
             }
         }
-        
-        function renderErrorMessage(message, isConfigError = false) {
-            let detailMessage = isConfigError 
-                ? `<p class="text-sm mt-1">Please check the GOOGLE_SHEET_CSV_URL variable in this HTML file's script.</p>`
-                : `<p class="text-sm mt-1">Try reloading the page. If the problem persists, contact the administrator.</p>`;
+
+                function renderErrorMessage(message, isConfigError = false) {
+            let detailMessage = '';
+            if (isConfigError) {
+                 detailMessage = `<p class="text-sm mt-1">Please check the GOOGLE_SHEET_CSV_URL variable in this HTML file's script.</p>`;
+            } else {
+                 detailMessage = `<p class="text-sm mt-1">Try reloading the page. If the problem persists, contact the administrator.</p>`;
+            }
+
+
 
             toolsGridContainerEl.innerHTML = `
                 <div class="flex-grow flex items-center justify-center p-4">
@@ -778,100 +776,27 @@ padding: 20px;
         }
 
 
-        function renderLoadingSkeleton() {
-            const skeletonCount = viewMode === 'grid' ? 6 : 4;
-            let skeletonHtml = '';
-            
-            if (viewMode === 'grid') {
-                for (let i = 0; i < skeletonCount; i++) {
-                    skeletonHtml += `
-                    <div class="bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-xl shadow-card-light dark:shadow-card-dark">
-                        <div class="flex items-start mb-3 sm:mb-4">
-                            <div class="p-2 sm:p-2.5 bg-slate-200 dark:bg-slate-700 rounded-lg mr-3 sm:mr-4 flex-shrink-0 skeleton-loader">
-                                <div class="w-5 h-5 sm:w-6 sm:h-6"></div>
-                            </div>
-                            <div class="min-w-0 flex-grow">
-                                <div class="h-5 bg-slate-200 dark:bg-slate-700 rounded skeleton-loader mb-2 w-3/4"></div>
-                                <div class="h-3 bg-slate-200 dark:bg-slate-700 rounded skeleton-loader w-1/2"></div>
-                            </div>
-                        </div>
-                        <div class="space-y-2 mb-4 sm:mb-5">
-                            <div class="h-3 bg-slate-200 dark:bg-slate-700 rounded skeleton-loader"></div>
-                            <div class="h-3 bg-slate-200 dark:bg-slate-700 rounded skeleton-loader w-5/6"></div>
-                            <div class="h-3 bg-slate-200 dark:bg-slate-700 rounded skeleton-loader w-2/3"></div>
-                        </div>
-                        <div class="flex flex-wrap gap-1 mb-4 sm:gap-1.5 sm:mb-5">
-                            <div class="h-6 bg-slate-200 dark:bg-slate-700 rounded-full skeleton-loader w-16"></div>
-                            <div class="h-6 bg-slate-200 dark:bg-slate-700 rounded-full skeleton-loader w-12"></div>
-                        </div>
-                        <div class="flex gap-2 sm:gap-3 mt-auto">
-                            <div class="h-8 bg-slate-200 dark:bg-slate-700 rounded-lg skeleton-loader flex-1"></div>
-                            <div class="h-8 bg-slate-200 dark:bg-slate-700 rounded-lg skeleton-loader flex-1"></div>
-                        </div>
-                    </div>`;
-                }
-            } else {
-                for (let i = 0; i < skeletonCount; i++) {
-                    skeletonHtml += `
-                    <div class="tool-card-list-item bg-white dark:bg-slate-800 p-3 sm:p-4 rounded-xl shadow-card-light dark:shadow-card-dark">
-                        <div class="tool-icon-container p-2 sm:p-2.5 bg-slate-200 dark:bg-slate-700 rounded-lg skeleton-loader">
-                            <div class="w-5 h-5 sm:w-6 sm:h-6"></div>
-                        </div>
-                        <div class="tool-content">
-                            <div class="h-5 bg-slate-200 dark:bg-slate-700 rounded skeleton-loader mb-2 w-3/4"></div>
-                            <div class="h-3 bg-slate-200 dark:bg-slate-700 rounded skeleton-loader w-1/2 mb-2"></div>
-                            <div class="h-3 bg-slate-200 dark:bg-slate-700 rounded skeleton-loader w-5/6 mb-3"></div>
-                            <div class="flex flex-wrap gap-1 sm:gap-1.5">
-                                <div class="h-6 bg-slate-200 dark:bg-slate-700 rounded-full skeleton-loader w-16"></div>
-                                <div class="h-6 bg-slate-200 dark:bg-slate-700 rounded-full skeleton-loader w-12"></div>
-                            </div>
-                        </div>
-                        <div class="tool-actions">
-                            <div class="h-8 bg-slate-200 dark:bg-slate-700 rounded-lg skeleton-loader w-20"></div>
-                            <div class="h-8 bg-slate-200 dark:bg-slate-700 rounded-lg skeleton-loader w-20"></div>
-                        </div>
-                    </div>`;
-                }
-            }
-            
-            toolsGridContainerEl.innerHTML = `
-                <div class="${viewMode === 'list' ? 'flex flex-col gap-3 sm:gap-4' : 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6'}">
-                    ${skeletonHtml}
-                </div>
-            `;
-        }
+function renderTools() {
+    if (!toolsGridContainerEl) return;
+    const toolsToDisplay = getFilteredTools();
+    
+    toolsGridContainerEl.innerHTML = ''; // Clear previous content or error messages
 
-        function renderTools() {
-            if (!toolsGridContainerEl) return;
-            
-            // Show loading skeleton while processing
-            renderLoadingSkeleton();
-            
-            // Use setTimeout to allow the UI to update before processing
-            setTimeout(() => {
-                const toolsToDisplay = getFilteredTools();
-                
-                if (toolsToDisplay.length > 0) {
-                    const toolsHtml = toolsToDisplay.map(tool => createToolCardHTML(tool)).join('');
-                    const gridDiv = document.createElement('div');
-                    gridDiv.className = `flex-grow ${viewMode === 'list' ? 'flex flex-col gap-3 sm:gap-4' : 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6'}`;
-                    gridDiv.innerHTML = toolsHtml;
-                    toolsGridContainerEl.innerHTML = '';
-                    toolsGridContainerEl.appendChild(gridDiv);
-                } else {
-                    toolsGridContainerEl.innerHTML = `
-                        <div class="col-span-full text-center py-6 sm:py-8">
-                            <i data-lucide="search-x" class="mx-auto w-10 h-10 text-gray-400 dark:text-slate-500 mb-3"></i>
-                            <p class="text-gray-500 dark:text-slate-400 text-sm sm:text-base">No tools found for this selection.</p>
-                            ${searchTerm ? '<p class="text-gray-400 dark:text-slate-500 text-xs mt-1">Try different search terms.</p>' : ''}
-                        </div>
-                    `;
-                }
-                refreshLucideIcons();
-            }, 50);
-        }
+    if (toolsToDisplay.length > 0) {
+        const toolsHtml = toolsToDisplay.map(tool => createToolCardHTML(tool)).join('');
+        const gridDiv = document.createElement('div');
+        gridDiv.id = 'toolsGridActual'; // Give it a distinct ID if needed
+        gridDiv.className = `flex-grow ${viewMode === 'list' ? 'flex flex-col gap-3 sm:gap-4' : 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6'}`;
+        gridDiv.innerHTML = toolsHtml;
+        toolsGridContainerEl.appendChild(gridDiv);
+    } else {
+        toolsGridContainerEl.innerHTML = `<p class="col-span-full text-center text-gray-500 dark:text-slate-400 py-6 sm:py-8 text-sm sm:text-base">No tools found for this selection.</p>`;
+    }
+    refreshLucideIcons();
+}
 
-        // --- MAIN CONTENT AREA LOGIC ---
+
+// --- MAIN CONTENT AREA LOGIC ---
         function getFilteredTools() {
             let tools = [];
             if (currentCategoryId === ALL_TOOLS_CATEGORY_ID) {
@@ -897,40 +822,32 @@ padding: 20px;
             }
             return tools;
         }
-        
-        function renderSubcategoryFilters() {
+
+
+     function renderSubcategoryFilters() {
             if (!subcategoryFiltersContainerEl) return;
             let subcategoriesForFilter = [];
             let uniqueSubMap = new Map();
 
             if (currentCategoryId === ALL_TOOLS_CATEGORY_ID) {
                 toolboxData.forEach(cat => {
-                    (cat.subcategories || []).forEach(sub => {
+                    (cat.subcategories || []).forEach(sub => { // Ensure subcategories array exists
                         if (!uniqueSubMap.has(sub.id)) {
-                             uniqueSubMap.set(sub.id, { 
-                                 id: sub.id, 
-                                 name: sub.name, 
-                                 displayName: `${cat.name.split(" ")[0]} / ${sub.name}` 
-                             });
+                             uniqueSubMap.set(sub.id, { id: sub.id, name: sub.name, displayName: `${cat.name.split(" ")[0]} / ${sub.name}` });
                         }
                     });
                 });
-                subcategoriesForFilter = Array.from(uniqueSubMap.values())
-                    .sort((a,b) => (a.displayName || a.name).localeCompare(b.displayName || b.name));
+                subcategoriesForFilter = Array.from(uniqueSubMap.values()).sort((a,b) => (a.displayName || a.name).localeCompare(b.displayName || b.name));
             } else {
                 const category = toolboxData.find(cat => cat.id === currentCategoryId);
                 if (category && category.subcategories) {
-                    subcategoriesForFilter = category.subcategories.map(s => ({
-                        id: s.id, 
-                        name: s.name, 
-                        displayName: s.name
-                    }));
+                    subcategoriesForFilter = category.subcategories.map(s => ({id: s.id, name: s.name, displayName: s.name}));
                 }
             }
             
             let html = '';
             if (subcategoriesForFilter.length > 0) {
-                 html += `<button data-subcategory-id="null" class="subcategory-filter-btn px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm rounded-md font-medium transition-colors ${!currentSubcategoryId ? 'bg-magic-purple text-white dark:bg-magic-teal dark:text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'}" aria-pressed="${!currentSubcategoryId}">All</button>`;
+                 html += `<button data-subcategory-id="null" class="subcategory-filter-btn px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm rounded-md font-medium transition-colors ${!currentSubcategoryId ? 'bg-magic-purple text-white dark:bg-magic-teal dark:text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'}" aria-pressed="${!currentSubcategoryId}">Todas</button>`;
             }
 
             const isSmallScreen = window.innerWidth < 640;
@@ -944,14 +861,14 @@ padding: 20px;
 
             if (canShowMore) {
                 html += `<button id="toggleShowAllSubcategoriesBtn" class="px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm rounded-md font-medium transition-colors text-magic-purple dark:text-magic-teal hover:bg-magic-purple/10 dark:hover:bg-magic-teal/10 flex items-center" aria-expanded="${showAllSubcategoriesState}">
-                            ${showAllSubcategoriesState ? 'Show Less' : 'Show More'}
+                            ${showAllSubcategoriesState ? 'Ver Menos' : 'Ver Más'}
                             <i data-lucide="${showAllSubcategoriesState ? 'chevron-up' : 'chevron-down'}" class="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1 sm:ml-1.5"></i>
                          </button>`;
             }
             
             const categoryObj = toolboxData.find(cat => cat.id === currentCategoryId);
             if (subcategoriesForFilter.length === 0 && currentCategoryId !== ALL_TOOLS_CATEGORY_ID && categoryObj && (!categoryObj.subcategories || categoryObj.subcategories.length === 0)) {
-                html = `<p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">No subcategories for this section.</p>`;
+                html = `<p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">No hay subcategorías para esta sección.</p>`;
             }
             
             subcategoryFiltersContainerEl.innerHTML = html;
@@ -974,7 +891,7 @@ padding: 20px;
                     categoryNameEl.textContent = categoryData.name;
                     categoryDescriptionEl.textContent = categoryData.description;
                 } else { 
-                    categoryNameEl.textContent = "Loading...";
+                    categoryNameEl.textContent = "Loading..."; // Fallback if category not found (should not happen if data is loaded)
                     categoryDescriptionEl.textContent = "";
                 }
             }
@@ -997,41 +914,99 @@ padding: 20px;
             refreshLucideIcons();
         }
 
-        // --- DATA FETCHING AND CACHING ---
-        function getCachedData() {
-            const cachedData = localStorage.getItem('magic_toolbox_data');
-            if (!cachedData) return null;
-            
-            try {
-                const { data, timestamp } = JSON.parse(cachedData);
-                const expiryTime = CACHE_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
-                if (Date.now() - timestamp < expiryTime) {
-                    return data;
-                }
-            } catch (e) {
-                console.error('Error parsing cached data:', e);
+
+
+         // --- EVENT HANDLERS ---
+        function handleCategorySelect(e) {
+            if (!categoryListContainerEl) return;
+            let target = e.target;
+            while(target && target !== categoryListContainerEl && !target.dataset.categoryId) {
+                target = target.parentElement;
             }
-            return null;
+            if (target && target.dataset.categoryId) {
+                e.preventDefault();
+                currentCategoryId = target.dataset.categoryId;
+                currentSubcategoryId = null;
+                searchTerm = '';
+                if(searchInputEl) searchInputEl.value = '';
+                if (window.innerWidth < 1024) { // lg breakpoint
+                    toggleSidebar(false);
+                }
+                renderSidebar(); 
+                renderMainContentArea();
+            }
+        }
+        
+        function handleSubcategorySelect(e) {
+            if (e.target.closest('.subcategory-filter-btn')) { // Use closest to handle clicks on child elements like span/icon
+                const button = e.target.closest('.subcategory-filter-btn');
+                const subId = button.dataset.subcategoryId;
+                currentSubcategoryId = subId === 'null' ? null : subId;
+                searchTerm = ''; // Reset search on subcategory change
+                if(searchInputEl) searchInputEl.value = '';
+                renderSubcategoryFilters(); // Re-render to update active states
+                renderTools();
+            }
+        }
+        
+        function handleSearchInput() {
+            if(searchInputEl) searchTerm = searchInputEl.value;
+            renderTools();
         }
 
-        function cacheData(data) {
-            localStorage.setItem('magic_toolbox_data', JSON.stringify({
-                data,
-                timestamp: Date.now()
-            }));
+        function handleViewModeChange(mode) {
+            viewMode = mode;
+            localStorage.setItem('magic_toolbox_view_mode', mode);
+            updateViewModeButtons();
+            renderTools(); 
         }
 
-        async function fetchAndProcessSheetData() {
-            // Show loading state
+        function handleOpenModalDelegated(e) {
+            if (!toolsGridContainerEl) return; // Listen on the container
+            let target = e.target;
+            // Traverse up to find the button, ensures clicks on icons inside buttons work
+            while(target && target !== toolsGridContainerEl && !target.classList.contains('open-modal-btn')) {
+                target = target.parentElement;
+            }
+            if (target && target.classList.contains('open-modal-btn')) {
+                const toolId = target.dataset.toolId;
+                openModal(toolId);
+            }
+        }
+
+
+
+
+
+        // --- GOOGLE SHEET DATA PROCESSING ---
+function generateDefaultToolDetails(toolName, subcategoryName, categoryName) {
+    return `
+        <p>Detailed information about <strong>${toolName}</strong>.</p>
+        <p>This tool is specifically designed to assist with various tasks related to ${subcategoryName.toLowerCase()} in the field of ${categoryName}.</p>
+        <h5>Key Features:</h5>
+        <ul>
+            <li>User-friendly and intuitive interface.</li>
+            <li>Advanced functionalities for ${categoryName.split(" ")[0]}.</li>
+            <li>Support for ${subcategoryName.split(" ")[0].toLowerCase()} and more.</li>
+            <li>Regular updates with new improvements.</li>
+            <li>Comprehensive documentation and community support.</li>
+        </ul>
+        <p>Perfect for both experienced professionals and users new to optimizing their ${subcategoryName.toLowerCase()} processes. Boost your productivity and achieve your goals faster with ${toolName}.</p>
+    `;
+}
+
+
+         async function fetchAndProcessSheetData() {
             if (loadingOverlayEl) loadingOverlayEl.style.display = 'flex';
-            if (loadingMessageEl) loadingMessageEl.textContent = 'Loading tools...';
-            
-            // Check for cached data first
-            const cachedData = getCachedData();
-            if (cachedData) {
-                console.log('Using cached data');
+            if (loadingMessageEl) loadingMessageEl.textContent = 'Loading tools from Google Sheets...';
+
+            if (GOOGLE_SHEET_CSV_URL === 'YOUR_GOOGLE_SHEET_PUBLISH_TO_WEB_CSV_URL_HERE' || !GOOGLE_SHEET_CSV_URL) {
+                console.error("GOOGLE_SHEET_CSV_URL is not configured.");
                 if (loadingOverlayEl) loadingOverlayEl.style.display = 'none';
-                return cachedData;
+                if (configNeededMessageContainerEl) configNeededMessageContainerEl.style.display = 'flex';
+                if (appRootContainerEl) appRootContainerEl.style.display = 'none';
+                refreshLucideIcons(); // For the icon in the config message
+                return []; // Return empty to prevent further processing
             }
 
             try {
@@ -1046,12 +1021,6 @@ padding: 20px;
                     skipEmptyLines: true,
                     transformHeader: header => header.trim(),
                 });
-
-                // Validate required columns
-                const missingColumns = REQUIRED_COLUMNS.filter(col => !parseResult.meta.fields.includes(col));
-                if (missingColumns.length > 0) {
-                    throw new Error(`Missing required columns: ${missingColumns.join(', ')}`);
-                }
 
                 if (parseResult.errors.length > 0) {
                     console.error('CSV Parsing errors:', parseResult.errors);
@@ -1078,7 +1047,7 @@ padding: 20px;
                             id: categoryId,
                             name: rawTool.CategoryName.trim(),
                             icon: rawTool.CategoryIcon?.trim() || ICONS_LIST[categoriesMap.size % ICONS_LIST.length],
-                            description: rawTool.CategoryDescription?.trim() || `Tools and resources for ${rawTool.CategoryName.trim()}.`,
+                            description: rawTool.CategoryDescription?.trim() || `Tools & Resources for ${rawTool.CategoryName.trim()}.`,
                             subcategories: [],
                             tools: []
                         });
@@ -1089,13 +1058,16 @@ padding: 20px;
                     if (!subcategoryObj) {
                         subcategoryObj = {
                             id: subcategoryId,
-                            name: rawTool.SubcategoryName.trim()
+                            name: rawTool.SubcategoryName.trim(),
+                            tools: [] // This will be populated if needed, but primary tool storage is in category.tools
                         };
                         category.subcategories.push(subcategoryObj);
                     }
                     
                     const toolIdSuffix = rawTool.ToolID_Suffix?.trim() || `tool${category.tools.length + 1}`;
-                    const tool = {
+
+
+ const tool = {
                         id: `${categoryId}-${subcategoryId}-${toolIdSuffix}`,
                         name: rawTool.ToolName.trim(),
                         description: rawTool.ToolDescription?.trim() || `A useful tool for ${rawTool.SubcategoryName.trim()}.`,
@@ -1118,78 +1090,58 @@ padding: 20px;
                     category.tools.push(tool);
                 });
                 
-                const result = Array.from(categoriesMap.values());
-                cacheData(result);
-                
                 if (loadingOverlayEl) loadingOverlayEl.style.display = 'none';
                 if (configNeededMessageContainerEl) configNeededMessageContainerEl.style.display = 'none';
                 if (appRootContainerEl) appRootContainerEl.style.display = 'block';
-                return result;
+                return Array.from(categoriesMap.values());
 
             } catch (error) {
                 console.error("Error fetching or processing sheet data:", error);
                 if (loadingOverlayEl) loadingOverlayEl.style.display = 'none';
-                
-                if (!GOOGLE_SHEET_CSV_URL || GOOGLE_SHEET_CSV_URL === 'YOUR_GOOGLE_SHEET_PUBLISH_TO_WEB_CSV_URL_HERE') {
+                // Show a general error message in the tools grid area or a more specific one if it's a config issue
+                if (GOOGLE_SHEET_CSV_URL === 'YOUR_GOOGLE_SHEET_PUBLISH_TO_WEB_CSV_URL_HERE' || !GOOGLE_SHEET_CSV_URL) {
                     if (configNeededMessageContainerEl) configNeededMessageContainerEl.style.display = 'flex';
-                    if (appRootContainerEl) appRootContainerEl.style.display = 'none';
+                     if (appRootContainerEl) appRootContainerEl.style.display = 'none';
                 } else {
-                    if (appRootContainerEl) appRootContainerEl.style.display = 'block';
+                    if (appRootContainerEl) appRootContainerEl.style.display = 'block'; // Show app structure but with error
                     renderErrorMessage(error.message);
                 }
-                return [];
+                return []; // Return empty on error
             }
         }
 
-        function generateDefaultToolDetails(toolName, subcategoryName, categoryName) {
-            return `
-                <p>Detailed information about <strong>${toolName}</strong>.</p>
-                <p>This tool is specifically designed to assist with various tasks related to ${subcategoryName.toLowerCase()} in the field of ${categoryName}.</p>
-                <h5>Key Features:</h5>
-                <ul>
-                    <li>User-friendly and intuitive interface</li>
-                    <li>Advanced functionalities for ${categoryName.split(" ")[0]}</li>
-                    <li>Support for ${subcategoryName.split(" ")[0].toLowerCase()} and more</li>
-                    <li>Regular updates with new improvements</li>
-                    <li>Extensive documentation and community support</li>
-                </ul>
-                <p>Perfect for both experienced professionals and users starting with optimizing their ${subcategoryName.toLowerCase()} processes. Boost your productivity and achieve your goals faster with ${toolName}.</p>
-            `;
-        }
-
-        // --- INITIALIZATION ---
+ // --- INITIALIZATION ---
         async function initializeApp() {
-            // Theme setup
             const storedTheme = localStorage.getItem('magic_toolbox_theme');
             isDarkMode = storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
             applyDarkMode();
             
-            // View mode setup
             const storedViewMode = localStorage.getItem('magic_toolbox_view_mode');
-            viewMode = (storedViewMode === 'list' || storedViewMode === 'grid') ? storedViewMode : 'grid';
+            if (storedViewMode === 'list' || storedViewMode === 'grid') {
+                viewMode = storedViewMode;
+            }
             
-            // UI setup
             updateDate();
             updateCopyrightYear();
             setupBackToTop();
 
-            // Load data
             toolboxData = await fetchAndProcessSheetData();
 
-            if (GOOGLE_SHEET_CSV_URL && GOOGLE_SHEET_CSV_URL !== 'YOUR_GOOGLE_SHEET_PUBLISH_TO_WEB_CSV_URL_HERE') {
-                if (toolboxData.length > 0) {
-                    currentCategoryId = toolboxData[0].id;
+            if (GOOGLE_SHEET_CSV_URL !== 'YOUR_GOOGLE_SHEET_PUBLISH_TO_WEB_CSV_URL_HERE' && GOOGLE_SHEET_CSV_URL) {
+                 if (toolboxData.length > 0) {
+                    currentCategoryId = toolboxData[0].id; // Default to first category
                 } else {
-                    currentCategoryId = ALL_TOOLS_CATEGORY_ID;
-                    if (!appRootContainerEl.querySelector('#toolsGridContainer .bg-red-100')) {
-                        renderErrorMessage("No tool data found in the Google Sheet or the format is incorrect.", false);
-                    }
+                    currentCategoryId = ALL_TOOLS_CATEGORY_ID; // Or all tools if no categories loaded but no config error
+                    if (!appRootContainerEl.querySelector('#toolsGridContainer .bg-red-100')) { // if no error message shown yet
+                renderErrorMessage("Could not find any tool data in the Google Sheet, or the data format is invalid.", false);                    }
                 }
+                 }
                 renderSidebar(); 
                 renderMainContentArea();
-            }
+            } // Else, the config message or error is already shown               
 
-            // Event listeners
+        
+   // Attach event listeners
             if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleDarkMode);
             if (openSidebarBtn) openSidebarBtn.addEventListener('click', () => toggleSidebar(true));
             if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', () => toggleSidebar(false));
@@ -1202,7 +1154,7 @@ padding: 20px;
             
             if (toolDetailModalEl) {
                 toolDetailModalEl.addEventListener('click', (e) => { 
-                    if (e.target === toolDetailModalEl) closeModal();
+                    if (e.target === toolDetailModalEl) closeModal(); // Click on backdrop closes modal
                 });
             }
             window.addEventListener('keydown', (e) => { 
@@ -1211,89 +1163,25 @@ padding: 20px;
                 }
             });
 
-            // Responsive sidebar setup
-            if (window.innerWidth >= 1024) {
-                if (sidebarEl) {
-                    sidebarEl.classList.remove('-translate-x-full');
-                    sidebarEl.classList.add('translate-x-0');
-                }
+            // Initial sidebar state for large screens
+            if (window.innerWidth >= 1024) { // lg breakpoint
                 const mainContentWrapper = document.getElementById('main-content-wrapper');
+                if (sidebarEl) {
+                     sidebarEl.classList.remove('-translate-x-full');
+                     sidebarEl.classList.add('translate-x-0');
+                }
                 if (mainContentWrapper) mainContentWrapper.classList.add('lg:ml-72');
-                isSidebarOpen = true;
+                isSidebarOpen = true; // Sidebar is open by default on large screens
             } else {
                 isSidebarOpen = false;
             }
             
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                if (window.innerWidth >= 1024 && !isSidebarOpen) {
-                    toggleSidebar(true);
-                } else if (window.innerWidth < 1024 && isSidebarOpen) {
-                    toggleSidebar(false);
-                }
-            });
-            
-            refreshLucideIcons();
-        }
-
-        // Event handlers
-        function handleCategorySelect(e) {
-            let target = e.target;
-            while(target && target !== categoryListContainerEl && !target.dataset.categoryId) {
-                target = target.parentElement;
-            }
-            if (target && target.dataset.categoryId) {
-                e.preventDefault();
-                currentCategoryId = target.dataset.categoryId;
-                currentSubcategoryId = null;
-                searchTerm = '';
-                if(searchInputEl) searchInputEl.value = '';
-                if (window.innerWidth < 1024) {
-                    toggleSidebar(false);
-                }
-                renderSidebar(); 
-                renderMainContentArea();
-            }
-        }
-        
-        function handleSubcategorySelect(e) {
-            if (e.target.closest('.subcategory-filter-btn')) {
-                const button = e.target.closest('.subcategory-filter-btn');
-                const subId = button.dataset.subcategoryId;
-                currentSubcategoryId = subId === 'null' ? null : subId;
-                searchTerm = '';
-                if(searchInputEl) searchInputEl.value = '';
-                renderSubcategoryFilters();
-                renderTools();
-            }
-        }
-        
-        function handleSearchInput() {
-            searchTerm = searchInputEl ? searchInputEl.value : '';
-            renderTools();
-        }
-
-        function handleViewModeChange(mode) {
-            viewMode = mode;
-            localStorage.setItem('magic_toolbox_view_mode', mode);
-            updateViewModeButtons();
-            renderTools(); 
-        }
-
-        function handleOpenModalDelegated(e) {
-            let target = e.target;
-            while(target && target !== toolsGridContainerEl && !target.classList.contains('open-modal-btn')) {
-                target = target.parentElement;
-            }
-            if (target && target.classList.contains('open-modal-btn')) {
-                const toolId = target.dataset.toolId;
-                openModal(toolId);
-            }
+            refreshLucideIcons(); // Final refresh
         }
 
         document.addEventListener('DOMContentLoaded', initializeApp);
-    </script>   
-        
 
+    </script>
 </body>
 </html>
+
