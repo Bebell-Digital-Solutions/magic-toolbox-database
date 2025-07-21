@@ -421,18 +421,22 @@ padding: 20px;
     
 
 
-   <div class="bebell-footer">
+<div class="bebell-footer">
         
             <p>Powered with 💖 by  
             <a href="https://bebelldigitalsolutions.com" class="bebell-link">
                 Bebell Digital Solutions.
             </a><br>
-          <a>Copyright © 2024 • All rights reserved.</a></p>
+          <a id="copyrightYear"> © 2024 • All rights reserved.</a></p>
     </div>
 
                 </footer>
 
             </div>
+
+
+
+            
 
             <div id="toolDetailModal" class="fixed inset-0 bg-black bg-opacity-60 dark:bg-opacity-75 flex items-center justify-center p-3 sm:p-4 z-50" style="display: none;" aria-modal="true" role="dialog" aria-labelledby="modalTitle">
                 <div id="toolDetailModalContentWrapper" class="bg-white dark:bg-slate-800 rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-4 sm:p-6 md:p-8 modal-content-anim custom-scrollbar">
@@ -523,7 +527,7 @@ padding: 20px;
 
         function updateCopyrightYear() {
             if (copyrightYearEl) {
-                copyrightYearEl.textContent = `© ${new Date().getFullYear()} Bebell Digital Solutions. All rights reserved.`;
+                copyrightYearEl.textContent = `© ${new Date().getFullYear()} Magic Toolbox. All rights reserved.`;
             }
         }
         
